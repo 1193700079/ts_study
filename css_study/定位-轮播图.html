@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定位-轮播图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        a {
+            text-decoration: none;
+            color: #6b7a8d;
+        }
+        li {
+            list-style: none;
+        }
+        .box {
+            position: relative;
+            width: 923px;
+            height: 446px;
+            background-color: pink;
+            margin: 100px auto;
+        }
+        .box img{
+            width: 923px;
+            height: 446px;
+        }
+        .prev,.next{
+            position: absolute;
+            top: 50%;
+            margin-top: -12px;
+            width: 60px;
+            height: 40px;
+            background-color: rgba(0,0,0,0.3);
+            text-align: center;
+            line-height: 40px;
+        }
+        .prev {
+            left: 0;
+            border-top-right-radius: 20px;
+            border-bottom-right-radius: 20px;
+        } 
+        .next {
+            right: 0;
+            border-top-left-radius: 20px;
+            border-bottom-left-radius: 20px;
+        } 
+
+        .dot {
+            position: absolute;
+            width: 200px;
+            height: 40px;
+            bottom: 10px;
+            left: 50%;
+            margin-left: -100px;
+            /* background-color: rgba(0,0,0,0.3); */
+        }
+        .dot li {
+            float: left;
+            width: 20px;
+            height: 20px;
+            margin-left: 15px;
+            background-color: rgba(240,240,240,0.7);
+            border-radius: 50%;
+        }
+        .box .dot .active{
+            background-color: orange
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <img src="./nova9-pro.jpg" alt="">
+
+        <a href="#" class="prev"> &lt;</a>
+        <a href="#" class="next"> &gt;</a>
+
+        <ul class="dot">
+            <li class="active"></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</body>
+</html>
