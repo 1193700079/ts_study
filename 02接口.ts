@@ -1,3 +1,13 @@
+/*
+@File    :   02接口.ts
+@Time    :   2021/12/14 13:43:11
+@Author  :   Ruiqing Yang
+@Version :   1.0
+@Contact :   1193700079@qq.com
+@Desc    :   None
+'''
+*/
+
 // function printLabel(labelledObj: { label: string }) {
 //   console.log(labelledObj.label);
 // }
@@ -5,8 +15,8 @@
 // let myObj = { size: 10, label: "Size 10 Object" };
 // printLabel(myObj);
 
-// 一：
-// 接口表述法：
+// 一： 接口定义函数参数
+// 接口表述法：   
 interface LabelledValue {
     label: string;
     size?: number;
@@ -40,7 +50,7 @@ console.log(newObj);
 
 
 let arr_a: number[] = [1, 2, 3, 4];
-let ro: ReadonlyArray<number> =  [1, 2, 3, 4,5];
+let ro: ReadonlyArray<number> =  [1, 2, 3, 4,5]; //这样的数组是不能操作的哦！ 只能读取
 // ro[0] = 12; // error!
 // ro.push(5); // error!
 // ro.length = 100; // error!
@@ -78,8 +88,7 @@ let squareOptions = { colour: "red", width: 100 };
 let mySquare3 = createSquare(squareOptions);
 
 
-// 二：
-// 接口里面定义函数
+// 二：接口定义函数
 interface SearchFunc {
   (source: string, subString: string): boolean;
 }
@@ -126,7 +135,7 @@ console.log(myStr)
 // let myNumber: number = myArray2["aaa"];
 // console.log(myNumber)
 
-// 四：类接口
+// 四：接口定义类接口
 interface ClockInterface {
     currentTime: Date;
     setTime(d: Date):void;
@@ -170,8 +179,82 @@ function sleep(delay:number) {
         continue; 
     }
 }
-sleep(5000);
+sleep(1000); //休眠1s
 
 clock.setTime(new Date())
 // .toLocaleString() 调用日期格式化 2021-12-14 13:25:11
 console.log(clock.getTime().toLocaleString());
+
+
+
+// 五： 看不懂啊
+// 构造函数
+interface ClockConstructor {
+    new (hour: number, minute: number): ClockInterface_;
+}
+// 实例方法
+interface ClockInterface_ {
+    tick():void;
+}
+
+const createClock = (ctor: ClockConstructor, hour: number, minute: number): ClockInterface_ => {
+    return new ctor(hour, minute);
+}
+
+class DigitalClock implements ClockInterface_ {
+    constructor(h: number, m: number) { }
+    tick() {
+        console.log("beep beep");
+    }
+}
+class AnalogClock implements ClockInterface_ {
+    constructor(h: number, m: number) { }
+    tick() {
+        console.log("tick tock");
+    }
+}
+
+let digital = createClock(DigitalClock, 12, 17).tick();
+let analog = createClock(AnalogClock, 7, 32).tick();
+
+
+
+// 一个接口可以继承多个接口，将接口里的成员都会复制过来
+interface Shape {
+    color: string;
+}
+
+interface PenStroke {
+    penWidth: number;
+}
+
+interface Square extends Shape, PenStroke {
+    sideLength: number;
+}
+
+let square = <Square>{}; //不太懂这个尖括号的含义 应该是个泛型吧
+square.color = "blue";
+square.sideLength = 10;
+square.penWidth = 5.0;
+
+
+
+
+// 一个对象同时作为函数和对象使用。。 好复杂的啊
+interface Counter {
+    (start: number): string; //函数
+    interval: number;  
+    reset(): void; //函数
+}
+
+const getCounter = (): Counter => {
+    let counter = <Counter>function (start: number) { };
+    counter.interval = 123;
+    counter.reset =  ()=>{ };
+    return counter;
+}
+
+let c = getCounter();
+c(10);
+c.reset();
+c.interval = 5.0;

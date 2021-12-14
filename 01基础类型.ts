@@ -1,3 +1,13 @@
+/*
+@File    :   01基础类型.ts
+@Time    :   2021/12/14 13:43:17
+@Author  :   Ruiqing Yang
+@Version :   1.0
+@Contact :   1193700079@qq.com
+@Desc    :   None
+'''
+*/
+
 /* 方法一
 npm install -D tslib @types/node
 npm install -g typescript
